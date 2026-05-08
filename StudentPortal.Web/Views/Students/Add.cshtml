@@ -1,0 +1,74 @@
+﻿@model StudentPortal.Web.Models.AddStudentViewModel
+
+@{
+    ViewData["Title"] = "Add Student";
+}
+
+<h1>Add Student</h1>
+
+<form id="addStudentForm" asp-action="Add" method="post" class="mt-3">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" type="email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Phone" class="form-label"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="Subscribed" class="form-check-input" />
+        <label asp-for="Subscribed" class="form-check-label"></label>
+    </div>
+
+    <button type="submit" id="saveButton" class="btn btn-primary">
+        <span id="saveSpinner" class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
+        <span id="saveText">Save</span>
+    </button>
+</form>
+
+@section Scripts {
+    <script>
+        (function ($) {
+            $(function () {
+                var $form = $('#addStudentForm');
+                var $button = $('#saveButton');
+                var $spinner = $('#saveSpinner');
+                var $text = $('#saveText');
+
+                $form.on('submit', function (e) {
+                    // If jquery.validate is present, respect client-side validation
+                    if (typeof $form.valid === 'function' && !$form.valid()) {
+                        // validation failed; do not disable the button
+                        return;
+                    }
+
+                    // Disable button and show spinner to prevent duplicate submissions
+                    $button.prop('disabled', true);
+                    $spinner.removeClass('d-none');
+                    $text.text('Saving...');
+                });
+
+                // Optional: re-enable button if user navigates back to the page without full reload
+                // (no-op in most server-post flows; included for resilience)
+                $(window).on('pageshow', function () {
+                    $button.prop('disabled', false);
+                    $spinner.addClass('d-none');
+                    $text.text('Save');
+                });
+            });
+        })(jQuery);
+    </script>
+}

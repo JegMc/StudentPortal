@@ -1,0 +1,16 @@
+﻿namespace StudentPortal.Web.Models.Entities
+{
+    public class Student
+    {
+        public Guid Id { get; set; }
+
+        public string? Name { get; set; }
+
+        public string? Email { get; set; }
+
+        public string? Phone { get; set; }
+
+        // Make non-nullable so tag helpers can render checkbox
+        public bool Subscribed { get; set; }
+    }
+}

@@ -1,0 +1,33 @@
+# Visual Studio / .NET
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# NuGet
+*.nupkg
+packages/
+
+# EF Core Migrations (keep them if you want to include)
+# Migrations/
+
+# Node / lib
+node_modules/
+wwwroot/lib/
+
+# publish
+publish/
+dist/
+
+# Local user secrets or machine-specific files
+secrets.json
+appsettings.Development.json
+
+# Rider/IDE caches
+.gradle/
